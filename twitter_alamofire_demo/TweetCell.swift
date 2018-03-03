@@ -19,6 +19,9 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var retweetLabel: UILabel!
+    @IBOutlet weak var likeLabel: UILabel!
+    
     
     var tweet: Tweet! {
         didSet {
@@ -26,24 +29,48 @@ class TweetCell: UITableViewCell {
             dateLabel.text = tweet.createdAtString
             nameLabel.text = tweet.user.name
             handleLabel.text = "@" + tweet.user.screenName
-            
+            retweetLabel.text = String(tweet.retweetCount)
+            likeLabel.text = String(tweet.favoriteCount)
             profileImage.layer.cornerRadius = profileImage.frame.size.width / 2;
             profileImage.layer.borderWidth = 1
             profileImage.layer.borderColor = UIColor.black.cgColor
             profileImage.clipsToBounds = true
+            
+//            profileImage.setImageWith(tweet.user.profileImageURL)
         }
     }
     
 
     @IBAction func OnReply(_ sender: Any) {
-        
+        // Todo: when clicked on user can add a comment to the post (Maybe??)
     }
     
     @IBAction func OnRetweet(_ sender: Any) {
-        
+        if(tweet.retweeted == true){
+            tweet.retweetCount = tweet.retweetCount - 1
+            retweetLabel.text = String(tweet.retweetCount)
+            tweet.retweeted = false
+            retweetButton.setImage(UIImage(named: "retweet-icon.png"), for: [])
+        }else{
+            tweet.retweetCount = tweet.retweetCount + 1
+            retweetLabel.text = String(tweet.retweetCount)
+            tweet.retweeted = true
+            retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: [])
+        }
     }
     
     @IBAction func OnLike(_ sender: Any) {
+        if(tweet.favorited == true){
+            tweet.favoriteCount = tweet.favoriteCount - 1
+            likeLabel.text = String(tweet.favoriteCount)
+            tweet.favorited = false
+            likeButton.setImage(UIImage(named: "favor-icon.png"), for: [])
+        }else{
+            tweet.favoriteCount = tweet.favoriteCount + 1
+            likeLabel.text = String(tweet.favoriteCount)
+            tweet.favorited = true
+            likeButton.setImage(UIImage(named: "favor-icon-red.png"), for: [])
+        }
     }
     
     override func awakeFromNib() {
