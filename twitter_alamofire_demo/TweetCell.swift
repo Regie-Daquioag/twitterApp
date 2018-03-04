@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class TweetCell: UITableViewCell {
     
@@ -36,8 +37,13 @@ class TweetCell: UITableViewCell {
             profileImage.layer.borderColor = UIColor.black.cgColor
             profileImage.clipsToBounds = true
             
-//            profileImage.setImageWith(tweet.user.profileImageURL)
+            profileImage.af_setImage(withURL: URL(string: tweet.user.profileImageURL)!)
+            
         }
+    }
+    
+    func refreshData(){
+        
     }
     
 
@@ -51,11 +57,27 @@ class TweetCell: UITableViewCell {
             retweetLabel.text = String(tweet.retweetCount)
             tweet.retweeted = false
             retweetButton.setImage(UIImage(named: "retweet-icon.png"), for: [])
+            
+            APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully unretweeted the following Tweet: \n\(tweet.text)")
+                }
+            }
         }else{
             tweet.retweetCount = tweet.retweetCount + 1
             retweetLabel.text = String(tweet.retweetCount)
             tweet.retweeted = true
             retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: [])
+            
+            APIManager.shared.unretweet(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully unretweeted the following Tweet: \n\(tweet.text)")
+                }
+            }
         }
     }
     
@@ -65,12 +87,29 @@ class TweetCell: UITableViewCell {
             likeLabel.text = String(tweet.favoriteCount)
             tweet.favorited = false
             likeButton.setImage(UIImage(named: "favor-icon.png"), for: [])
+        
+            APIManager.shared.unfavorite(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully unfavorited the following Tweet: \n\(tweet.text)")
+                }
+            }
         }else{
             tweet.favoriteCount = tweet.favoriteCount + 1
             likeLabel.text = String(tweet.favoriteCount)
             tweet.favorited = true
             likeButton.setImage(UIImage(named: "favor-icon-red.png"), for: [])
+            
+            APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully favorited the following Tweet: \n\(tweet.text)")
+                }
+            }
         }
+        
     }
     
     override func awakeFromNib() {
@@ -83,5 +122,7 @@ class TweetCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
+    
+
     
 }
