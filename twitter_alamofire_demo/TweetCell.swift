@@ -26,24 +26,24 @@ class TweetCell: UITableViewCell {
     
     var tweet: Tweet! {
         didSet {
-            tweetTextLabel.text = tweet.text
-            dateLabel.text = tweet.createdAtString
-            nameLabel.text = tweet.user.name
-            handleLabel.text = "@" + tweet.user.screenName
-            retweetLabel.text = String(tweet.retweetCount)
-            likeLabel.text = String(tweet.favoriteCount)
-            profileImage.layer.cornerRadius = profileImage.frame.size.width / 2;
-            profileImage.layer.borderWidth = 1
-            profileImage.layer.borderColor = UIColor.black.cgColor
-            profileImage.clipsToBounds = true
-            
-            profileImage.af_setImage(withURL: URL(string: tweet.user.profileImageURL)!)
-            
+            refreshData()
         }
     }
     
     func refreshData(){
+        tweetTextLabel.text = tweet.text
+        dateLabel.text = tweet.createdAtString
+        nameLabel.text = tweet.user.name
+        handleLabel.text = "@" + tweet.user.screenName
+        retweetLabel.text = String(tweet.retweetCount)
+        likeLabel.text = String(tweet.favoriteCount)
         
+        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2;
+        profileImage.layer.borderWidth = 1
+        profileImage.layer.borderColor = UIColor.black.cgColor
+        profileImage.clipsToBounds = true
+        
+        profileImage.af_setImage(withURL: URL(string: tweet.user.profileImageURL)!)
     }
     
 
