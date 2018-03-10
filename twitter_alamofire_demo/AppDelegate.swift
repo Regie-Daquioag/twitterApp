@@ -1,4 +1,3 @@
-//
 //  AppDelegate.swift
 //  twitter_alamofire_demo
 //

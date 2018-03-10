@@ -54,6 +54,15 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell){
+            let tweet = tweets[indexPath.row]
+            let detailViewController = segue.destination as! DetailViewController
+            detailViewController.tweet = tweet
+        }
+    }
+    
     
     @IBAction func didTapLogout(_ sender: Any) {
         APIManager.shared.logout()
