@@ -25,6 +25,10 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshData()
+    }
+    
+    func refreshData(){
         if let tweet = tweet{
             tweetLabel.text = tweet.text
             usernameLabel.text = tweet.user.name
@@ -33,18 +37,18 @@ class DetailViewController: UIViewController {
             likeCountLabel.text = String(tweet.favoriteCount)
             retweetCountLabel.text = String(tweet.retweetCount)
             profileImage.af_setImage(withURL: URL(string: tweet.user.profileImageURL)!)
-        }
-        
-        if(tweet.retweeted == true){
-            retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: [])
-        }else{
-            retweetButton.setImage(UIImage(named: "retweet-icon.png"), for: [])
-        }
-        
-        if(tweet.favorited == true){
-            likeButton.setImage(UIImage(named: "favor-icon-red.png"), for: [])
-        }else{
-            likeButton.setImage(UIImage(named: "favor-icon.png"), for: [])
+            
+            if(tweet.retweeted == true){
+                retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: [])
+            }else{
+                retweetButton.setImage(UIImage(named: "retweet-icon.png"), for: [])
+            }
+            
+            if(tweet.favorited == true){
+                likeButton.setImage(UIImage(named: "favor-icon-red.png"), for: [])
+            }else{
+                likeButton.setImage(UIImage(named: "favor-icon.png"), for: [])
+            }
         }
     }
     
