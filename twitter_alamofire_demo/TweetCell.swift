@@ -42,8 +42,20 @@ class TweetCell: UITableViewCell {
         profileImage.layer.borderWidth = 1
         profileImage.layer.borderColor = UIColor.black.cgColor
         profileImage.clipsToBounds = true
-        
         profileImage.af_setImage(withURL: URL(string: tweet.user.profileImageURL)!)
+        
+        if(tweet.retweeted == true){
+            retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: [])
+        }else{
+            retweetButton.setImage(UIImage(named: "retweet-icon.png"), for: [])
+        }
+        
+        if(tweet.favorited == true){
+            likeButton.setImage(UIImage(named: "favor-icon-red.png"), for: [])
+        }else{
+            likeButton.setImage(UIImage(named: "favor-icon.png"), for: [])
+        }
+        
     }
     
 
@@ -58,7 +70,7 @@ class TweetCell: UITableViewCell {
             tweet.retweeted = false
             retweetButton.setImage(UIImage(named: "retweet-icon.png"), for: [])
             
-            APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
+            APIManager.shared.unretweet(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
                     print("Error favoriting tweet: \(error.localizedDescription)")
                 } else if let tweet = tweet {
@@ -71,11 +83,11 @@ class TweetCell: UITableViewCell {
             tweet.retweeted = true
             retweetButton.setImage(UIImage(named: "retweet-icon-green.png"), for: [])
             
-            APIManager.shared.unretweet(tweet) { (tweet: Tweet?, error: Error?) in
+            APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
                     print("Error favoriting tweet: \(error.localizedDescription)")
                 } else if let tweet = tweet {
-                    print("Successfully unretweeted the following Tweet: \n\(tweet.text)")
+                    print("Successfully retweeted the following Tweet: \n\(tweet.text)")
                 }
             }
         }

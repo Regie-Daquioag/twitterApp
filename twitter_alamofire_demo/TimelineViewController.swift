@@ -55,11 +55,13 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UITableViewCell
-        if let indexPath = tableView.indexPath(for: cell){
-            let tweet = tweets[indexPath.row]
-            let detailViewController = segue.destination as! DetailViewController
-            detailViewController.tweet = tweet
+        if(segue.identifier == "tagSegue"){
+            let cell = sender as! UITableViewCell
+            if let indexPath = tableView.indexPath(for: cell){
+                let tweet = tweets[indexPath.row]
+                let detailViewController = segue.destination as! DetailViewController
+                detailViewController.tweet = tweet
+            }
         }
     }
     
@@ -67,6 +69,12 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func didTapLogout(_ sender: Any) {
         APIManager.shared.logout()
     }
+    
+    
+    @IBAction func onTapCompose(_ sender: Any) {
+        self.performSegue(withIdentifier: "OnCompose", sender: nil)
+    }
+    
     
     
     /*
