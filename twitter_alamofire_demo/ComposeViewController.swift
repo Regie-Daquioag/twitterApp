@@ -19,11 +19,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tweetButton: UIButton!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var handleLabel: UILabel!
+    var user: User!
     
     weak var delegate: ComposeViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
         textView.placeholder = "What's happening?"
         textView.placeholderColor = UIColor.lightGray
