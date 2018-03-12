@@ -21,12 +21,15 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var handleLabel: UILabel!
-    var user: User!
     
     weak var delegate: ComposeViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        profileImageView.af_setImage(withURL: URL(string: (User.current?.profileImageURL)!)!)
+        userNameLabel.text = User.current?.name
+        handleLabel.text = User.current?.screenName
 
         // Do any additional setup after loading the view.
         textView.placeholder = "What's happening?"
