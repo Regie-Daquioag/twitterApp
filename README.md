@@ -99,7 +99,7 @@ The following **stretch** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] List anything else that you can get done to improve the app functionality!
 - I added the persist user so mu profileviewcontroller could use it
 - I added a pull to refresh in the timelineviewcontoller
 
