@@ -73,16 +73,16 @@ limitations under the License.
 
 # Project 6 - *Twitter App*
 
-Time spent: **X** hours spent in total
+Time spent: **7** hours spent in total
 
 ## User Stories
 
 The following **required** stories are completed:
 
-- [ ] User can tap on a tweet to view it in a detail view, with controls to retweet, favorite, and reply (2pts)
-- [ ] User can compose a new tweet by tapping on a compose button. (3pts)
-- [ ] When composing a tweet, user sees a countdown for the number of characters remaining for the tweet (out of 140) (2pt)
-- [ ] User can view their profile in a *profile tab* (3pts)
+- [x] User can tap on a tweet to view it in a detail view, with controls to retweet, favorite, and reply (2pts)
+- [x] User can compose a new tweet by tapping on a compose button. (3pts)
+- [x] When composing a tweet, user sees a countdown for the number of characters remaining for the tweet (out of 140) (2pt)
+- [x] User can view their profile in a *profile tab* (3pts)
 - Contains the user header view: picture and tagline
 - Contains a section with the users basic stats: # tweets, # following, # followers
 
@@ -100,17 +100,19 @@ The following **stretch** features are implemented:
 The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
+- I added the persist user so mu profileviewcontroller could use it
+- I added a pull to refresh in the timelineviewcontoller
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. is there s wy to make a pulltorefresh in a non-tableview contoller
+2. the connctions in the storyboard still messes me up a bit
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='twitter2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -120,7 +122,7 @@ Describe any challenges encountered while building the app.
 
 ## License
 
-Copyright [yyyy] [name of copyright owner]
+Copyright 2018 Regie Daquioag
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
