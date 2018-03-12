@@ -15,13 +15,31 @@ class User {
     var profileImageURL: String
     var coverImageURL: URL
     
-    var followersCount: Int
-    var followingCount: Int
+    var numFollowers: String
+    var numFollowing: String
+    var numTweets: String
     
     var dictionary: [String: Any]?
     var description: String
     
     private static var _current: User?
+    
+    init(dictionary: [String: Any]) {
+        name = dictionary["name"] as! String
+        screenName = "@" + (dictionary["screen_name"] as! String)
+        profileImageURL = (dictionary["profile_image_url_https"] as? String)!
+        
+        if dictionary["profile_banner_url"] != nil  {
+            coverImageURL = URL(string:dictionary["profile_banner_url"] as! String)!
+        }else{
+            coverImageURL = URL(string:"nil")!
+        }
+        numTweets = String(dictionary["statuses_count"] as! Int)
+        numFollowers = String(dictionary["followers_count"] as! Int)
+        numFollowing = String(dictionary["friends_count"] as! Int)
+        description = dictionary["description"] as! String
+        self.dictionary = dictionary
+    }
     
     static var current: User? {
         get {
@@ -44,21 +62,5 @@ class User {
                 defaults.removeObject(forKey: "currentUserData")
             }
         }
-    }
-    
-    init(dictionary: [String: Any]) {
-        name = dictionary["name"] as! String
-        screenName = "@" + (dictionary["screen_name"] as! String)
-        profileImageURL = (dictionary["profile_image_url_https"] as? String)!
-        
-        if dictionary["profile_banner_url"] != nil  {
-            coverImageURL = URL(string:dictionary["profile_banner_url"] as! String)!
-        }else{
-            coverImageURL = URL(string:"nil")!
-        }
-        followersCount = dictionary["followers_count"] as! Int
-        followingCount = dictionary["friends_count"] as! Int
-        description = dictionary["description"] as! String
-        self.dictionary = dictionary
     }
 }
