@@ -26,6 +26,17 @@ class ProfileViewController: UIViewController {
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.clipsToBounds = true
         
+        refreshData()
+        
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func refreshData(){
         coverImageView.af_setImage(withURL: (User.current?.coverImageURL)!)
         profileImageView.af_setImage(withURL: URL(string: (User.current?.profileImageURL)!)!)
         tweetsCount.text = User.current?.numTweets
@@ -34,13 +45,6 @@ class ProfileViewController: UIViewController {
         
         usernameLabel.text = User.current?.name
         handleLabel.text = User.current?.screenName
-        
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
